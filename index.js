@@ -15,10 +15,13 @@ const serpmeKahvalti = {isim: "Serpme Kahvaltı", fiyat: 16, kategori:"Kahvaltı
 */
 
 
-function MenuElemaniOlustur(/*Kodlar buraya*/){
-	/*Kodlar buraya*/
+function MenuElemaniOlustur(a, b, c){
+	const newObject = {isim: a, fiyat: b, kategori: c};
+	console.log("Görev:", newObject);
+	return newObject;
 }
 
+MenuElemaniOlustur("Cheeseburger", "8", "Burgerler");
 
 
 /*  Görev 1b (otomatik test yok): 
@@ -31,7 +34,9 @@ function MenuElemaniOlustur(/*Kodlar buraya*/){
 	Örnek: MenuElemaniOlustur("Karışık Pizza",5,"Pizzalar") şunu döndürür: {isim:"Karışık Pizza",fiyat:5,kategori:"Pizzalar"}
 */
 
-
+MenuElemaniOlustur("Latte", "5 TL", "Kahveler");
+MenuElemaniOlustur("Su", "2 TL", "Icecekler");
+MenuElemaniOlustur("Kurabiye", "3 TL", "Kuru Gıdalar");
 
 /* Görev 2: 
 	Özel bir öğle yemeği yiyorsun! Öğretmen ve öğrencilere %25, diğer kişilere %10 indirim var. Aşağıdaki burger nesnesine, indirimi fiyatı otomatik olarak hesaplayan bir metot ekleyin.
@@ -49,11 +54,20 @@ function MenuElemaniOlustur(/*Kodlar buraya*/){
 const burger = {
 	isim: "Burger", 
 	fiyat: 18, 
-	kategori: "Öğle Yemeği", 
-
+	kategori: "Öğle Yemeği",
+	indirim: function(kimBu) {
+		if (kimBu === "öğretmen") {
+			return this.fiyat * 0.75;
+		} else if (kimBu === "öğrenci") {
+			return this.fiyat * 0.75;
+		} else if (kimBu === "diğer") {
+			return this.fiyat * 0.90
+		}
+	}
 }
 
-
+burger.indirim("öğretmen"); 
+console.log("Görev 2:", burger.indirim("öğretmen"));
 
 ///////////////Değerlendirmeler (MVP)///////////////////
 const degerlendirmeler = [
@@ -71,7 +85,7 @@ const degerlendirmeler = [
 	Yukarıdaki degerlendirmeler dizisini(array) kullanarak:
 	1. Sadece Ahmet'in geribildirimini konsolda görüntüleyin - fonksiyona gerek yok
 */
-
+console.log("Görev 3: Ahmet'in Geri Bildirimi:", degerlendirmeler[5].geribildirim);
 
 
 /*  Görev 4 (ototest yok):  
@@ -80,7 +94,8 @@ const degerlendirmeler = [
 	2. degerlendirmeler dizisini konsolda görüntüleyerek çalışmanızı kontrol edin
 */
 
-
+degerlendirmeler[7].geribildirim = "bu mekan bir harika dostum, yine de garsonun gülümsememesinden puan kırdım";
+console.log("Görev 4: Reyna'nın Yeni Atanan Bildirimi:", degerlendirmeler[7].geribildirim);
 
 /*  Görev 5: 
 	isim, puan, geribildirim'i içeren bir değerlendirme nesnesi oluşturup, yeni değerlendirmeyi mevcut dizinin(array) sonuna ekleyip sonuç dizisini döndüren bir fonksiyon tanımlayın. 
@@ -94,11 +109,18 @@ const degerlendirmeler = [
 */
 
 
-function DegerledirmeEkle(/*Kodlar buraya */){
-	/*Kodlar buraya */
-	
+function DegerledirmeEkle(degerlendirmeler, a, b, c){
+	const isim1 = a;
+	const puan1 = b;
+	const geriBildirim1 = c;
+	const yeniObject = {isim: isim1, puan: puan1, geribildirim: geriBildirim1};
+	//console.log(yeniObject);
+	degerlendirmeler.push(yeniObject); 
+	return degerlendirmeler
 }
 
+DegerledirmeEkle(degerlendirmeler, "Aytaç", 10, "SüngerBob, Yengeç Burger'leri çok leziz Yapıyor!");
+console.log("Görev 5:", degerlendirmeler[8]);
 
 
 /*  Görev 6: 
@@ -111,12 +133,10 @@ function DegerledirmeEkle(/*Kodlar buraya */){
 	Örnek: AnahtardanDegerlendirmeAl(degerlendirmeler,0) şunu döndürmeli: "Nalan isimli kişi 5 puan verdi ve şunları yazdı: Mükemmel atmosfer ve mükemmel vegan seçenekleri!"
 */
 
-
-function AnahtardanDegerlendirmeAl(/*Kodlar buraya*/) {
-	/*Kodlar buraya*/
-
+function AnahtardanDegerlendirmeAl(degerlendirmeler, a) {
+	return degerlendirmeler[a].isim + " isimli kişi " + degerlendirmeler[a].puan + " puan verdi ve şunları yazdı: " + degerlendirmeler[a].geribildirim;
 }
-
+AnahtardanDegerlendirmeAl(degerlendirmeler, 5);
 
 
 /*  Görev 7:  
@@ -132,10 +152,11 @@ function AnahtardanDegerlendirmeAl(/*Kodlar buraya*/) {
 */
 
 
-function SonDegerlendirmeyiAl(/*Kodlar buraya*/) {
-	/*Kodlar buraya*/
+function SonDegerlendirmeyiAl(degerlendirmeler) {
+	const no = (degerlendirmeler.length - 1)
+	return degerlendirmeler[no].isim + " isimli kişi " + degerlendirmeler[no].puan + " puan verdi ve şunları yazdı: " + degerlendirmeler[no].geribildirim;
 } 
-
+SonDegerlendirmeyiAl(degerlendirmeler);
 
 
 /////////////// BONUS  GÖRVLER////////////////////
